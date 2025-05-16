@@ -1,0 +1,8 @@
+{
+    "mockSwap": {
+        "input": "SOL",
+        "output": "USDC",
+        "rate": "1 SOL = 25.50 USDC",
+        "platform": "Raydium"
+    }
+}
