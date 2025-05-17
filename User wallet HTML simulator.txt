@@ -1,0 +1,148 @@
+MLFP user wallet html code
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MLFP Wallet Simulation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2b2b2b;
+    }
+    .wallet-section {
+      background: white;
+      padding: 20px;
+      margin: 15px auto;
+      border-radius: 8px;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    label {
+      display: block;
+      margin: 10px 0 4px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
+    .output {
+      background: #eef1f6;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+
+<h1>MLFP Wallet Simulation</h1>
+
+<div class="wallet-section">
+  <label for="token">Select Token</label>
+  <select id="token">
+    <option value="SOL">SOL</option>
+    <option value="BTC">BTC</option>
+    <option value="USDC">USDC</option>
+    <option value="wBTC">wBTC</option>
+    <option value="wETH">wETH</option>
+  </select>
+
+  <label for="amount">Enter Amount</label>
+  <input type="number" id="amount" value="1" step="any"/>
+
+  <label for="destination">Cross-Chain Destination Address</label>
+  <input type="text" id="destination" placeholder="Enter destination address"/>
+
+  <button onclick="autoBuy()">Auto Buy</button>
+  <button onclick="autoSell()">Auto Sell</button>
+  <button onclick="autoWrap()">Auto Wrap</button>
+  <button onclick="autoUnwrap()">Auto Unwrap</button>
+  <button onclick="crossChainDelivery()">Cross-Chain Delivery</button>
+
+  <div class="output" id="log"></div>
+</div>
+
+<script>
+  function getValue(id) {
+    return document.getElementById(id).value;
+  }
+
+  function logOutput(text) {
+    document.getElementById("log").innerText = text;
+  }
+
+  function autoBuy() {
+    const token = getValue("token");
+    const amount = getValue("amount");
+    logOutput(`Auto Buy Triggered:
+> Buying ${amount} ${token} using MoonPay...
+> Fiat payment confirmed. ${amount} ${token} credited to wallet.`);
+  }
+
+  function autoSell() {
+    const token = getValue("token");
+    const amount = getValue("amount");
+    if (token === "SOL") {
+      logOutput(`Auto Sell Triggered:
+> Selling ${amount} ${token} for fiat using MoonPay...
+> Fiat sent to linked account.`);
+    } else {
+      logOutput(`Auto Sell Triggered:
+> Swapping ${amount} ${token} to SOL using Raydium...
+> Selling equivalent SOL for fiat using MoonPay...
+> Fiat sent to linked account.`);
+    }
+  }
+
+  function autoWrap() {
+    const token = getValue("token");
+    const amount = getValue("amount");
+    logOutput(`Auto Wrap Triggered:
+> Swapping ${amount} ${token} to SOL via MoonPay...
+> Swapping SOL to w${token} on Raydium...
+> w${token} added to wallet.`);
+  }
+
+  function autoUnwrap() {
+    const token = getValue("token");
+    const amount = getValue("amount");
+    const baseToken = token.startsWith('w') ? token.slice(1) : token;
+    logOutput(`Auto Unwrap Triggered:
+> Swapping ${amount} ${token} to SOL via Raydium...
+> Swapping SOL to ${baseToken} using MoonPay...
+> ${baseToken} sent to your designated wallet address.`);
+  }
+
+  function crossChainDelivery() {
+    const token = getValue("token");
+    const amount = getValue("amount");
+    const destination = getValue("destination");
+    logOutput(`Cross-Chain Delivery Triggered:
+> Swapping ${amount} ${token} to SOL on Raydium...
+> ${amount} SOL swapped for BTC on MoonPay and sent to: ${destination}
+> Cross-chain delivery completed.`);
+  }
+</script>
+
+</body>
+</html>

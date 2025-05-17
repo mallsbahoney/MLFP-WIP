@@ -1,0 +1,196 @@
+Merchant wallet sim updated and fixed 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Solana Merchant Simulator</title>
+  <style>
+    body { font-family: sans-serif; margin: 40px; background: #f4f4f4; }
+    .container { max-width: 700px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    input, select, button { width: 100%; padding: 10px; margin: 10px 0; }
+    #qrcode { margin: 20px auto; text-align: center; }
+    .log-box { background: #eee; padding: 10px; border-radius: 5px; font-size: 14px; white-space: pre-wrap; min-height: 100px; }
+    .flex-row { display: flex; gap: 10px; }
+    .link-display { word-wrap: break-word; font-size: 13px; margin-top: 10px; color: #0066cc; text-align: center; }
+    .copy-button, .launch-button, .clear-button { padding: 6px 12px; font-size: 12px; margin-top: 6px; margin-right: 6px; }
+    .limit-box { background: #f9f9f9; border: 1px dashed #ccc; border-radius: 6px; font-size: 14px; text-align: center; padding: 10px; margin-top: 20px; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Solana Merchant Simulator</h2>
+
+    <label>Enter POS Amount (USD)</label>
+    <input type="number" id="amount" placeholder="e.g. 25.00" />
+
+    <label>Merchant Markup (%)</label>
+    <input type="number" id="markup" value="0" />
+
+    <div class="flex-row">
+      <div style="flex: 1;">
+        <label>Transaction Type</label>
+        <select id="txnType">
+          <option value="fiatToCrypto">Fiat → Crypto (Customer Pays Fiat)</option>
+          <option value="cryptoToFiat">Crypto → Fiat (Customer Pays Crypto)</option>
+        </select>
+      </div>
+      <div style="flex: 1;">
+        <label>Crypto Used</label>
+        <select id="currency">
+          <option value="SOL">SOL</option>
+          <option value="USDC">USDC</option>
+          <option value="USDT">USDT</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Customer Wallet Address</label>
+    <input type="text" id="walletAddress" placeholder="Enter Solana wallet address" value="MerchantWallet123" />
+
+    <button onclick="generateTransaction()">Generate QR + Payment Flow</button>
+
+    <div id="qrcode"></div>
+    <div class="link-display" id="linkDisplay"></div>
+    <div style="text-align: center;">
+      <button class="copy-button" onclick="copyLink()">Copy Link</button>
+      <button class="launch-button" onclick="openMoonPay()" id="launchBtn" disabled>Launch MoonPay Payment</button>
+      <button class="clear-button" onclick="clearLog()">Clear Window</button>
+    </div>
+
+    <div class="log-box" id="logBox">Awaiting action...</div>
+
+    <div class="flex-row">
+      <button onclick="simulateWebhook()">Simulate Webhook (Fiat → Crypto Complete)</button>
+      <button onclick="simulateCryptoReceipt()">Simulate Crypto Receipt (Crypto → Fiat)</button>
+    </div>
+
+    <div class="limit-box">
+      <strong>Fiat → Crypto Daily Limit</strong><br />
+      <span id="limitDisplayFiatToCrypto">Used: $0.00 of $50,000.00</span>
+    </div>
+
+    <div class="limit-box">
+      <strong>Crypto → Fiat Daily Limit</strong><br />
+      <span id="limitDisplayCryptoToFiat">Used: $0.00 of $50,000.00</span>
+    </div>
+  </div>
+
+  <script>
+    let paymentLink = "";
+    let externalTransactionId = "";
+    let dailyUsedFiatToCrypto = 0.00;
+    let dailyUsedCryptoToFiat = 0.00;
+    const dailyLimit = 50000.00;
+
+    function updateLimitDisplays() {
+      document.getElementById("limitDisplayFiatToCrypto").innerText =
+        `Used: $${dailyUsedFiatToCrypto.toFixed(2)} of $${dailyLimit.toFixed(2)}`;
+      document.getElementById("limitDisplayCryptoToFiat").innerText =
+        `Used: $${dailyUsedCryptoToFiat.toFixed(2)} of $${dailyLimit.toFixed(2)}`;
+    }
+
+    function generateTransaction() {
+      const amount = parseFloat(document.getElementById("amount").value);
+      const markup = parseFloat(document.getElementById("markup").value || 0);
+      const txnType = document.getElementById("txnType").value;
+      const currency = document.getElementById("currency").value;
+      const walletAddress = document.getElementById("walletAddress").value.trim();
+
+      if (!walletAddress) {
+        alert("Please enter a valid wallet address.");
+        return;
+      }
+
+      if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount.");
+        return;
+      }
+
+      const merchantMarkup = markup / 100;
+      const platformFee = 0.01;
+      const finalUSD = amount * (1 + merchantMarkup + platformFee);
+
+      externalTransactionId = "mock_txn_" + Math.floor(Math.random() * 1e6);
+
+      paymentLink = `https://www.moonpay.com/buy?currencyCode=${currency}&baseCurrencyAmount=${finalUSD.toFixed(2)}&walletAddress=${walletAddress}&externalTransactionId=${externalTransactionId}`;
+
+      document.getElementById("qrcode").innerHTML = "";
+      document.getElementById("linkDisplay").innerText = "";
+
+      QRCode.toCanvas(paymentLink, function (error, canvas) {
+        if (error) {
+          console.error(error);
+          document.getElementById("qrcode").innerText = "QR generation failed.";
+          return;
+        }
+        document.getElementById("qrcode").appendChild(canvas);
+        document.getElementById("linkDisplay").innerText = paymentLink;
+        document.getElementById("launchBtn").disabled = false;
+      });
+
+      document.getElementById("logBox").innerText =
+        `Transaction Type: ${txnType}\n` +
+        `Crypto Used: ${currency}\n` +
+        `POS Total: $${amount.toFixed(2)}\n` +
+        `Markup: ${markup}% + 1% platform fee\n` +
+        `Final Charge: $${finalUSD.toFixed(2)} (${currency})\n` +
+        `Transaction ID: ${externalTransactionId}\n\n` +
+        (txnType === "fiatToCrypto"
+          ? `Customer scans QR or clicks Launch to buy ${currency}.\nWaiting for webhook confirmation...`
+          : `Customer pays ${currency} directly to wallet.\nWaiting for crypto receipt...`);
+
+      window.lastTxnAmount = finalUSD;
+      window.lastTxnType = txnType;
+    }
+
+    function openMoonPay() {
+      if (!paymentLink) return;
+      window.open(paymentLink, "_blank");
+    }
+
+    function copyLink() {
+      if (!paymentLink) {
+        alert("No link to copy.");
+        return;
+      }
+      navigator.clipboard.writeText(paymentLink).then(() => {
+        alert("Payment link copied to clipboard!");
+      });
+    }
+
+    function simulateWebhook() {
+      if (!externalTransactionId) {
+        alert("No transaction started.");
+        return;
+      }
+      document.getElementById("logBox").innerText +=
+        `\n\n[Webhook Triggered]\nFiat payment confirmed.\nCrypto delivered to buyer wallet.`;
+
+      if (window.lastTxnAmount && window.lastTxnType === "fiatToCrypto") {
+        dailyUsedFiatToCrypto += window.lastTxnAmount;
+        updateLimitDisplays();
+      }
+    }
+
+    function simulateCryptoReceipt() {
+      if (!externalTransactionId) {
+        alert("No transaction started.");
+        return;
+      }
+
+      document.getElementById("logBox").innerText +=
+        `\n\n[Wallet Listener Triggered]\nCrypto received to merchant wallet.\nAuto-sell triggered via MoonPay...\nFiat being sent to merchant bank/card.`;
+
+      if (window.lastTxnAmount && window.lastTxnType === "cryptoToFiat") {
+        dailyUsedCryptoToFiat += window.lastTxnAmount;
+        updateLimitDisplays();
+      }
+    }
+
+    function clearLog() {
+      document.getElementById("logBox").innerText = "Awaiting action...";
+    }
+  </script>
+</body>
+</html>
