@@ -7,7 +7,7 @@ MLFP is a Solana-powered protocol integrating MoonPay and Raydium to enable seam
 
 > Two wallets. One protocol. Infinite use cases.
 
-Please use HTML simulators for visual examples.
+Please use HTML simulators for visual examples, which simulate the back end flows of the User & Merchant wallets.
 
 Both wallets allow auto conversion for all incoming crypto into fiat, and all incoming fiat into crypto.
 
