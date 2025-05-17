@@ -1,0 +1,570 @@
+MLFP (MallsLabs Fiat Protocol)
+
+The app is connected to both MoonPay and Raydium built in. 
+
+It helps facilitate cross chain interaction entirely on chain, coordinated entirely on Solana. 
+
+It also allows for regular everyday merchants to accept crypto to fiat payments and fiat to crypto payments.
+
+How it works
+
+Raydium is used to hold & exchange wrappped tokens & any other token on Solana back to and from SOL.
+
+SOL is used as the main carrier between the blockchain and fiat currency. 
+
+To receive crypto on any other blockchain, MoonPay is used to swap SOL for the destination crypto and send it to the designated address on that chain.
+
+Wrapped tokens can be used to simulate on chain logic with SOL, and ensure users end up with the on chain token.
+
+This is done by simply using wrapped tokens for exchanges, then swapping that token for SOL on Raydium, then swapping the SOL for the designated token and sending it to the designated address. 
+
+This means a transaction can be confirmed once a wrapped token is exchanged, because the unwrapping to the actual token occurs on the native local side with no extra requirement from the other user.
+
+Any token can be sold for fiat at anytime directly from the app/wallet, simply by auto converting it to SOL first through Raydium, and then auto selling the SOL for fiat on MoonPay.
+
+Any token can be automatically added to the wallet simply by initiating a wrap of that token, which auto sends it to MoonPay to get SOL, and then auto uses that SOL to swap for a wrapped version of that token on Raydium. 
+
+This also allows for merchants to easily accept fiat and cryptocurrency payments simply by downloading the app, without interfering with their existing POS systems, and allowing them to set their own fees outside of company set fees. 
+
+This is all achieved by a single wallet app, which has 2 versions: 
+
+MLFP Wallet
+SOL wallet 
+
+Includes auto buy with manual one click confirmation 
+Auto buys crypto with fiat whenever it doesn’t have enough to complete an action on SOL.
+
+Includes easy one click Manual fiat sell
+This is a built in sell for fiat feature for any token
+
+For SOL
+Triggers moon pay sell for fiat 
+
+For wrapped tokens & every other token 
+Swaps to SOL, sells SOL for fiat 
+
+Includes auto wrap
+Allows regular tokens to be sent to the wallet by initiating a MoonPay swap for that token into SOL, then auto swapping SOL for the wrapped token equivalent on Raydium
+
+Includes auto un wrap 
+Allows wrapped tokens to be auto swapped on Raydium to SOL, and then auto swapped the SOL to the actual token through MoonPay to any designated address 
+
+Custom MLFP Merchant Wallet 
+Custom SOL wallet app that allows merchants to accept fiat to crypto or crypto to fiat transactions from the app. 
+
+Solana is currently the best and most reliable blockchain to facilitate real world transactions through in real time.
+
+MoonPAy is one of the most reliable fiat to crypto providers in the world. 
+
+These 2 are joined together to create a seamless fiat to crypto bridge for merchants that works right out the box.
+
+Using just a simple app, any merchant can begin accepting crypto payments to cash, or cash payments to crypto. 
+
+A user simply downloads the app, which creates for them a standard Solana wallet (or an existing one can be linked). 
+
+This Solana works the exact same way as any other Solana wallet, but it has custom (Ramp or Moonpay) buy/sell integrated. 
+
+A user simply sets their own mark up in percentage or straight amount so this can be automatically added to every amount.
+(A standard 1% fee in crypto is hardcoded into every transaction that goes to the main company wallet)
+
+Once this is set, they are ready to get started.
+
+To accept crypto payments —> fiat:
+
+Solana is the only crypto payment accepted, due to speed and reliability.
+
+Any user can swap any crypto to Solana in the app when they plan to use it for a crypto payment using MP.
+
+Crypto payments on SOL can be made in either SOL, USDC, or USDT.
+
+Merchants ring order up using normal POS. 
+
+Take owed amount in POS and add it to the merchant Wallet. Select crypto to cash as accepted payment. 
+
+The pre set fee amounts are automatically added to this amount, and it is converted into the needed crypto equivalent. 
+
+A QR code is made by the user, who scans it to make the payment to buy the requested crypto from MP on their end.
+
+Once the wallet receives the SOL, the request is completed.
+
+Everytime the wallet receives any crypto, it immediately sells it for fiat to the merchant’s pre set bank or debit card.
+
+To accept fiat payments —> crypto: 
+
+Ring order up using normal POS. 
+
+Take owed amount in POS and add it to the merchant Wallet. Select cash to crypto as accepted payment. 
+
+The pre set fee amounts are automatically added to this amount, and it is converted into the needed cash equivalent. 
+
+A QR code is made by the user, who scans it to make the payment to buy the requested crypto from MP on their end.
+
+The webhook can watch the custom ID of this transaction to confirm on the first device’s end tho see payment is accepted.
+
+Once this is shown, it completes the txn cause the crypto will come to user wallet, so the finalization time is irrelevant.
+
+The POS txn can then be closed using a custom discount code to log it in the system without collecting cash for it. 
+
+This wallet helps easily convert any token from a native token to a wrapped token on SOL, which can easily be traded back into SOL and then sold for fiat when needed or swapped when needed.
+
+The wallets work like standard wallets with simple, automated integrations w/ trusted providers like MoonPay & Raydium.
+
+This allows wrapped tokens & any other token to be automatically be used as payment from any merchant, and allows a merchant the option to convert specific wrapped tokens into native versions of that token or convert to SOL for cash.
+
+The app is also user friendly: 
+
+It doesn’t require any crypto to be added to use & features all other functions of a regular blockchain wallet.
+
+To use it, all a user has to do is scan a QR code link which initiates the associated Raydium and/or MoonPay action. 
+
+Solana allows for quick, real time transfer speeds with little delay - allowing it to mimic real world transaction flows. 
+
+The beauty of MLFP:
+These two wallets alone are enough to unlock everything your protocol promises:
+
+1. MLFP Wallet (User Wallet)
+
+This is a smart, self-custodial Solana wallet that acts like a personal fiat-crypto-cross-chain hub.
+
+It handles:
+•	Auto Buy: Top-up with fiat on demand
+•	Auto Sell: Cash out any token to fiat (via Raydium + MoonPay)
+•	Auto Wrap/Unwrap: Move between native tokens and wrapped tokens
+•	Cross-Chain Delivery: Automatically convert SOL to the destination token and send it to the user’s specified wallet
+
+Why it’s enough:
+Because it coordinates both:
+•	On-chain logic (Raydium swaps, wrapped token handling)
+•	Fiat flow (MoonPay API, address-specific delivery)
+And it requires zero setup or balances to begin — everything is event-driven.
+
+2. MLFP Merchant Wallet
+
+This is a specialized version of the same wallet with built-in logic for merchant use cases.
+
+It handles:
+•	Accepting crypto and receiving fiat
+•	Accepting fiat and delivering crypto
+•	Custom markups
+•	1-click QR generation
+•	Webhooks to verify payment
+•	Auto-settlement to bank/card
+
+Why it’s enough:
+Because it makes any merchant POS system crypto-capable without needing new hardware or software — they just use the app.
+
+Why Two Wallets Are All You Need:
+•	They’re both non-custodial
+•	They’re both smart wallets with embedded swap and fiat functions
+•	They allow both sides of any transaction (user ↔ merchant, fiat ↔ crypto, chain ↔ chain)
+•	You don’t need separate services, bridges, or platforms — everything is routed through Solana and coordinated through the wallet itself
+
+This is exactly what makes MLFP so elegant:
+Two wallets. One protocol. Infinite use cases.
+From a street vendor to a protocol developer, MLFP gives everyone the tools to transact across fiat, crypto, and chains — seamlessly.
+
+Here’s a clear, structured breakdown of the biggest problems MLFP solves — and how it solves each one:
+
+1. Problem: Crypto Still Doesn’t Work in the Real World
+
+How MLFP Solves It:
+•	Enables merchants to accept crypto and receive fiat instantly (and vice versa) without changing their POS.
+•	Uses QR codes to trigger on-demand MoonPay and Raydium actions — no crypto literacy required.
+•	Settlement happens in fiat or crypto, depending on the merchant’s choice, with just a smartphone.
+
+2. Problem: Cross-Chain Interactions Are Complex, Risky, and Slow
+
+How MLFP Solves It:
+•	Uses wrapped tokens on Solana to simulate cross-chain logic.
+•	Auto-swaps SOL to the destination token via MoonPay and sends it to the user’s chosen wallet on another chain.
+•	No bridges, no HTLCs, no lockups — all on Solana, using trusted swap APIs and native tokens.
+
+3. Problem: Selling Any Token for Fiat is Friction-Filled
+
+How MLFP Solves It:
+•	Enables any token to be converted to fiat through this path:
+Token → SOL (Raydium) → Fiat (MoonPay)
+•	Embedded in the wallet, so the user doesn’t need to touch a centralized exchange or jump threw off-ramp hoops.
+
+4. Problem: Onboarding with Fiat Still Requires a Custodial Middleman
+
+How MLFP Solves It:
+•	Built-in Auto Buy triggers MoonPay purchases only when needed — based on wallet activity.
+•	Users can start with $0, and buy just enough to complete their intended action.
+•	Fiat goes directly to their non-custodial wallet, preserving self-sovereignty.
+
+5. Problem: Multi-token Wallet Management Is Confusing
+
+How MLFP Solves It:
+•	Auto Wrap: converts any token into its wrapped version on Solana for compatibility.
+•	Auto Unwrap: turns wrapped tokens back into native tokens and sends them cross-chain.
+•	This simplifies the token logic into SOL in, SOL out — no need to understand token standards.
+
+6. Problem: Crypto Apps Are Isolated from Fiat Infrastructure
+
+How MLFP Solves It:
+•	MoonPay and Raydium are natively integrated into the wallet — not external tools.
+•	This turns Solana into a programmable router between fiat, tokens, and other chains — all coordinated by one app.
+
+7. Problem: Developers Waste Time Rebuilding the Same Fiat/Swap Infrastructure
+
+How MLFP Solves It:
+•	Gives devs a wallet system with fiat support, swap support, wrapping support, and QR triggers out of the box.
+•	They can focus on building their app — not re-integrating the same on-ramp/off-ramp logic.
+
+Here’s how MLFP helps global infrastructure, payments, and currency swaps:
+
+1. Crypto = Universal Language of Value
+•	Crypto (especially stablecoins and major tokens) isn’t tied to any nation or currency.
+•	SOL, USDC, wBTC, and cryptos of the such are globally recognized, borderless assets.
+•	MLFP uses this to its advantage by treating crypto as the bridge between local currencies.
+
+2. MoonPay = Global Fiat Gateway
+•	MoonPay supports 160+ countries and dozens of local fiat currencies (USD, EUR, INR, BRL, NGN, etc.).
+•	This means MLFP users can:
+•	Buy crypto in their own currency (e.g., Kenyan shillings → USDC)
+•	Sell crypto for local currency (e.g., SOL → fiat in the Philippines)
+•	The app automatically converts fiat into crypto, and crypto into local fiat — using SOL as the global carrier.
+
+3. MLFP Enables Global Peer-to-Peer Currency Swaps
+
+Imagine this:
+A freelancer in Brazil wants to be paid in BRL.
+A client in the US wants to pay in USD.
+They both use MLFP.
+Flow:
+1.	The US client buys USDC or SOL using USD (via MoonPay).
+2.	Sends it to the freelancer’s MLFP Wallet.
+3.	Freelancer sells SOL for BRL through MoonPay inside the wallet.
+
+No delays, no compliance bottlenecks, done seamlessly by using the wallet & protocol and existing apps like MoonPay and Raydium.
+
+MLFP becomes the new global FX protocol:
+•	Crypto = bridge
+•	MoonPay = local rails
+•	SOL = logic layer
+
+4. Governments & Banks Can Be Layered On
+•	MLFP’s architecture is fully compliant-capable.
+•	Webhooks, KYC’d MoonPay endpoints, and wallet address tracking make it possible to:
+•	Add taxation
+•	Integrate with CBDCs
+•	Offer bank-native off-ramps
+It creates a “neutral infrastructure layer” that both users and institutions can interact with.
+
+5. Global Merchant Acceptance Without Borders
+
+A merchant in Turkey can:
+•	Accept crypto from tourists
+•	Automatically receive Turkish Lira
+•	Without needing to register on a local exchange or manage compliance
+
+A street vendor in Kenya can:
+•	Show a QR code
+•	Accept crypto
+•	Cash out to M-Pesa via MoonPay — all from MLFP
+
+Why It Matters
+MLFP removes the concept of national financial barriers.
+•	It uses crypto as a universal currency rail
+•	It uses fiat ramps to localize on each end
+•	It requires only an internet connection and a wallet
+
+MLFP turns Solana into a real-time, universal payments router for the world — with fiat on both ends, and crypto in the middle.
+
+MLFP is easy to use and deploy because it’s designed around familiar behaviors, no technical setup, and instant usability.
+
+Here’s exactly why and how it’s so simple for both users and merchants — and why it works right out of the box today:
+
+1. No Crypto or App Setup Required to Start
+•	Users don’t need any crypto to begin.
+•	Wallet auto-detects shortfalls and prompts an on-demand MoonPay top-up.
+•	This means users can “just click pay” — even with $0 in their crypto wallet.
+•	Merchants don’t need to configure blockchains, tokens, or nodes.
+•	The wallet handles token selection, fee calculation, and fiat settlement automatically.
+
+2. Works with Any Phone or Device
+•	MLFP runs as a mobile/web app and/or web extension, using QR codes for interaction.
+•	The merchant shows a QR code, the user scans it, and everything is handled behind the scenes (buying, swapping, sending).
+•	This mimics traditional payment systems like tap-to-pay or Venmo — no education curve.
+
+3. MoonPay & Raydium Handle Everything Complex
+
+MLFP doesn’t reinvent crypto infrastructure — it coordinates it:
+•	MoonPay handles fiat-to-crypto, crypto-to-fiat, and regional banking/payment logic.
+•	Raydium handles in-wallet swaps and token logic (including wrapping).
+•	So the app itself is just a UX layer + logic coordinator — there’s nothing risky or experimental.
+
+4. No POS Integration Needed
+•	Merchants don’t need to change their existing point-of-sale system.
+•	They simply enter the total into the app, which handles fee markup, QR generation, and payment flow.
+•	This means any shop can go live in minutes, just like using Square or Stripe.
+
+5. Self-Custodial and Compliant
+•	The wallet is non-custodial — users and merchants control their keys.
+•	But all fiat ramps go through MoonPay, which handles:
+•	KYC
+•	Card processing
+•	Regional banking compliance
+•	So it’s secure for users and safe for businesses from a legal/regulatory standpoint.
+
+6. Can Be Used Today — Right Now
+
+Because:
+•	MoonPay SDK and API are live and production-ready
+•	Raydium swap APIs are public and tested
+•	QR generation, wallet UI, and webhooks are standard web/mobile components
+•	No Layer 1 changes, no smart contract deployment required to get started
+
+This means it could be launched and used today needing only a few core parts:
+•	A basic front-end (HTML/React/Flutter)
+•	Wallet integration (Phantom or in-app keypair)
+•	MoonPay API keys
+•	Raydium swap function calls
+
+	MLFP works today, right now, for anyone.
+
+How dApps Use Wrapped Tokens for On-Chain Logic Coordination
+
+The Core Pattern:
+1.	A dApp ends a transaction by sending a wrapped token (e.g., wBTC) to a user’s Solana wallet.
+2.	This signals that an action has completed and the user now holds value — but in a wrapped format.
+3.	The MLFP wallet automatically detects the wrapped token, and:
+•	Swaps it to SOL via Raydium
+•	Swaps SOL to the native token (e.g., BTC) via MoonPay
+•	Sends the real BTC to the user’s BTC wallet (or any designated wallet)
+
+Why This Works
+•	Wrapped tokens on Solana (wBTC, wETH, etc.) act as proof of intent or on-chain receipts.
+•	No bridges are needed, because the “unwrapping” is really just:
+1.	A swap to SOL
+2.	A MoonPay-powered native token purchase
+3.	A direct transfer to any valid address on the target chain
+This is all offloaded to the MLFP Wallet, making the UX seamless.
+
+Use Cases for dApps (Enabled by This Flow)
+
+1. Cross-Chain Token Drops
+•	A user performs some action on a Solana dApp (e.g. completes a challenge).
+•	The dApp sends them 0.01 wETH.
+•	The wallet auto-converts that to real ETH and sends it to their Ethereum wallet.
+No bridging. No delay. Just “you earned this,” and it arrives natively.
+
+2. Multi-Chain Payouts and Rewards
+•	A DAO on Solana rewards contributors with wBTC.
+•	Contributors can choose to:
+•	Keep it as wrapped BTC on Solana
+•	Auto-unwrap it to real BTC to a personal address
+•	Auto-convert to another token or chain
+This introduces optionality and logic branching based on wallet logic.
+
+3. Logic-Based Destination Addresses
+•	dApps can define who receives the final unwrapped token.
+•	The sender
+•	A third-party wallet (e.g. pay a vendor)
+•	A smart contract (e.g. cross-chain staking, donation, investment)
+This means Solana apps can trigger native transfers on other chains, coordinated entirely through:
+•	Wrapped token delivery
+•	MLFP wallet rules
+•	MoonPay as final settlement layer
+
+4. Pay-to-Receive or Cross-App Handshake Logic
+•	Imagine App A sends a wrapped token to a user.
+•	The user chooses to unwrap it to App B’s wallet on another chain.
+•	Now dApps can coordinate value routing across ecosystems with just:
+•	A token send on Solana
+•	A UI that asks where to unwrap and send
+
+Why This Is So Powerful
+•	dApps no longer need to handle bridges, or smart contract interoperability across chains.
+
+They just need to:
+•	Use wrapped tokens
+•	Send them to the right MLFP wallet
+•	Let the wallet + MoonPay handle the rest
+
+This turns Solana into the programmable logic layer, and the MLFP wallets into the main global value routers.
+
+Developer Summary:
+
+Wrapped Token On-Chain Coordination Pattern (MLFP Style):
+
+1. dApp completes action
+2. Sends wTOKEN to user
+3. MLFP wallet:
+   - Detects wTOKEN
+   - Raydium: wTOKEN → SOL
+   - MoonPay: SOL → native token
+   - Sends native token to chosen destination
+
+Outcome:
+•	No bridges
+•	No smart contract changes on other chains
+•	User (or dApp) decides where the value ends up
+•	dApps build complex cross-chain logic using just token sends on Solana
+
+MLFP Merchant Wallet: Instantly Turning Crypto Into Real-World Money, Globally
+
+The MLFP Merchant Wallet is not just a crypto wallet — it’s a universal point-of-sale system that allows any store, vendor, or business in the world to start accepting crypto as real-world money — tomorrow.
+
+Here’s how and why it’s so transformative:
+
+1. Accepts Crypto from Anyone, Anywhere
+•	Merchants can accept SOL, USDC, USDT, or any other supported token via swap.
+•	Customers from any country can scan the merchant’s QR code and pay with crypto.
+•	The merchant doesn’t need to hold, manage, or even understand crypto.
+Just like accepting a credit card — but with borderless, permissionless value.
+
+2. Automatically Converts Crypto to Fiat
+•	As soon as the merchant wallet receives crypto, it:
+•	Swaps to SOL (if needed) via Raydium
+•	Sells SOL to fiat via MoonPay
+•	Deposits fiat into the merchant’s linked bank account or card
+This all happens automatically. The merchant just sees their money arrive.
+
+3. No POS Integration, No Terminals, No Bank Accounts Needed
+•	The wallet generates a QR code that any user can scan.
+•	Works with any phone, no installation or hardware required.
+•	Merchants can operate even without a local banking relationship, depending on MoonPay coverage.
+
+A merchant in Argentina, Kenya, India, or the U.S. can all go live the same day.
+
+4. Merchants Set Their Own Markups + Fees•	
+
+The app includes built-in fields for:
+•	POS amount entry
+•	Markup percentage or fixed fee
+•	MLFP auto-adds a 1% protocol fee, but the rest is customizable.
+•	This gives merchants total control — they earn what they want from crypto payments.
+
+5. Works Globally on Day One
+•	Powered by MoonPay, which supports fiat in 160+ countries.
+•	No need to register with a crypto exchange.
+•	No need to manage price volatility, stablecoins, or tax reporting tools.
+
+MLFP turns the crypto into fiat — safely, instantly, and legally — without the merchant touching the crypto themselves.
+
+6. Merchants Can Also Accept Fiat and Deliver Crypto
+•	The Merchant Wallet isn’t just for crypto payments.
+•	It also lets merchants receive fiat from a customer (via card/Apple Pay) and deliver crypto to a wallet — like a crypto vending machine.
+Perfect for:
+•	Onboarding new users
+•	Topping up customer wallets in stores
+•	Offering a branded retail crypto experience
+
+7. 24-Hour Global Payments Infrastructure
+•	No opening hours.
+•	No weekend delays.
+•	No border restrictions.
+•	Just crypto in, fiat out, for any merchant on Earth.
+
+Why This Can Start Tomorrow
+•	The infrastructure (MoonPay + Raydium + Solana) is already live.
+
+The merchant just needs:
+•	An internet connection
+•	The MLFP Merchant wallet
+•	A card or account to receive fiat
+
+There’s zero setup cost, no regulatory risk for the merchant, and no disruption to their existing business.
+
+MLFP turns every shop in the world into a global crypto-enabled store — overnight, while also allowing each of them flexibility to receive crypto, cash, or both.
+
+Here are some examples of what can be built or done using MLFP — split into real-world applications and dApp/infrastructure integrations.
+
+REAL-WORLD USE CASES
+
+1. Global Crypto Point-of-Sale System (Crypto → Fiat)
+•	Merchants accept crypto (SOL, USDC, etc.) and auto-sell for fiat into their bank or card.
+•	Works anywhere MoonPay is supported.
+•	No additional hardware or POS integration needed.
+
+2. Crypto Wallet for Fiat-Based Users (Fiat → Crypto)
+•	A user with $0 crypto can top up only when needed.
+•	Perfect for first-time users, travelers, or freelancers in emerging markets.
+
+3. Peer-to-Peer Currency Swaps
+•	A user in the US sends SOL.
+•	A user in Nigeria cashes out in NGN.
+•	MLFP handles swap + conversion using MoonPay and Raydium.
+
+4. Global Freelance Payments
+•	Freelancers receive crypto (or stablecoins) and cash out to their local currency without touching exchanges.
+•	Clients pay in their native currency via the QR flow.
+
+5. Tourist Payments
+•	Local merchants accept crypto from international tourists and receive local fiat.
+•	Tourists don’t need to convert cash or open local accounts.
+
+6. Donation/Nonprofit Payment Infrastructure
+•	NGOs accept global crypto donations.
+•	Auto-convert to fiat for local usage.
+•	Can track funds via wallet infrastructure for transparency.
+
+7. Offline Vendor or Event Payments
+•	Use MLFP QR codes for concerts, food stalls, markets.
+•	No terminals needed — just phones and the wallet.
+
+DAPP / WEB3 DEVELOPER USE CASES
+
+1. Unified Fiat-to-Token On-Ramp for Any dApp
+•	dApps can embed MLFP’s wallet or SDK to let users buy tokens directly inside the app, in fiat.
+
+2. Smart Contract Triggers Based on Fiat Events
+•	Developers can build dApps where fiat purchases (via webhook) trigger on-chain actions — a completely new paradigm.
+
+3. Cross-Chain dApp Support Without Bridges
+•	Use MLFP to simulate multi-chain settlement (e.g. pay in BTC → fulfill in USDC) using SOL + MoonPay without bridges or HTLCs.
+
+4. NFT Marketplaces with Fiat Onboarding
+•	Users buy NFTs by auto-purchasing SOL at the moment of checkout.
+•	No need to pre-fund wallet or worry about fees.
+
+5. Fiat-Enabled Token Sales / Airdrops
+•	Use MLFP wallet to allow fiat-based participation in presales, launches, or DAOs — with KYC handled by MoonPay.
+
+6. Micropayment Apps
+•	Build subscription or tipping apps where users can fund with fiat instantly when needed.
+•	MLFP handles just-in-time top-up and token flow.
+
+7. Staking or Yield dApps with Fiat Exit Paths
+•	Auto-unstake or auto-sell yield earnings for fiat.
+•	Users don’t need to manage tokens — the app handles swaps and off-ramps.
+
+MLFP is not just a set of wallets — it’s a universal payments layer + coordination protocol that enables crypto, fiat, and cross-chain value to move through one flow.
+
+What To Build Now (Mock + Core Logic)
+
+1. UI/UX and Wallet Framework
+•	Full HTML/React/Flutter front-end interface
+•	Wallet setup and keypair generation
+•	Local token balance tracking (using Solana public RPC)
+•	Transaction history display (read-only via Solana API)
+•	QR code generation (for simulated buy/sell flows)
+
+2. Simulated Core Features
+•	Auto Buy logic (trigger a simulated fiat top-up)
+•	Auto Sell logic (token → SOL → fiat mock flow)
+•	Auto Wrap (token → wToken simulated swap via Raydium)
+•	Auto Unwrap (wToken → token simulated flow)
+•	Wrapped token detection and trigger handling
+•	Simulated webhook listener (mock confirmation flow)
+
+3. Raydium Integration (Read & Simulate)
+•	Use open Raydium APIs or simulated JSON data
+•	Set up a UI for token swaps
+•	Simulate SOL ↔ wToken swaps
+
+4. Transaction Simulation Flow
+•	Button actions triggering visual confirmation
+•	Transaction builder logic (without sending real txns)
+•	Logging every “step” of a conversion or payment flow
+
+What Will Be Plugged In Later (With Full Access To MoonPay & Raydium SDK/API)
+
+Fiat-to-Crypto (MoonPay Buy)	
+Crypto-to-Fiat (MoonPay Sell)		
+On-chain token swaps (Raydium)		SDK/API access
+Real webhook callbacks	
+MoonPay API
+Real token price feeds	
