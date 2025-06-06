@@ -25,9 +25,9 @@ Merchant Mode is the same interface connected to the same user wallet, but is re
 
 There are 9 automated back flows that power the wallet, but the user flow can be summarized like this:
 
--Paying with CASH = MoonPay buy of SOL which goes to recipient address 
+-Paying with CASH = MoonPay buy of SOL which goes to recipient address.
 
--Paying with CRYPTO = direct token send to recipient’s address using SOL or any SOL token. 
+-Paying with CRYPTO = Direct token send to recipient’s address using SOL or any SOL token.
 
 -Once the Solana crypto is in the recipient’s wallet, it is either held, swapped to a diff token, or sold via MoonPay for cash. 
 
