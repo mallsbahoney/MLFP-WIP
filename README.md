@@ -9,7 +9,7 @@ Preview Wallet here: https://ohara.ai/mini-apps/miniapp_cmbgl7p8r0hcd0skj34727y8
 
 > One wallet. Infinite use cases.
 
-Please use included demo link above for usage example, and use the HTML similator code to see a visualization of the back end flows of the wallet.
+Please use included demo link above for usage example, and use the HTML simulator code to see a visualization of the back end flows of the wallet.
 
 Concept Summary:
 
